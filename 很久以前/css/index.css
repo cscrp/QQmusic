@@ -1,0 +1,169 @@
+html {
+  font-size: 100px;
+}
+html,
+body,
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+#app {
+  position: relative;
+  margin: 0 auto;
+  max-width: 7.5rem;
+}
+/* 遮罩层 */
+.bg_img,
+.mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.bg_img {
+  z-index: -2;
+  background: url(../images/1.gif) no-repeat;
+  background-size: cover;
+  filter: blur(7px);
+  width: 110%;
+  height: 110%;
+  left: -0.2rem;
+  top: -0.2rem;
+}
+.mark {
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.5);
+}
+.header_box,
+.main_box,
+.footer_box {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+/* 头部 */
+.header_box {
+  height: 18vh;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header_box .info {
+  display: flex;
+}
+.header_box .info .cover {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.header_box .info .title,
+.header_box .info .author {
+  max-width: 4.6rem;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.34rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.header_box .info .author {
+  font-size: 0.3rem;
+}
+.header_box .music_btn {
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: url(../images/music.svg) no-repeat;
+  background-size: 100% 100%;
+}
+.header_box .music_btn.move {
+  animation: musicMove 1s linear 0s infinite both;
+}
+@keyframes musicMove {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* 主体 */
+.main_box {
+  height: 65vh;
+  padding: 0 0.2rem;
+  position: relative;
+}
+.main_box .wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: top 0.2s;
+}
+.main_box .wrapper p {
+  line-height: 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.3rem;
+}
+.main_box .wrapper p.active {
+  color: #31C27C;
+  transition: color 0.3s;
+}
+/* 尾部 */
+.footer_box {
+  height: 17vh;
+  padding: 0.2rem;
+}
+.footer_box .download {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  text-indent: 0.4rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 0.36rem;
+  background: url(../images/sprite_play.png) no-repeat #31C27C;
+  background-size: 0.8rem 7rem;
+  background-position: 0.2rem -5.83rem;
+}
+.footer_box .download:active {
+  background-color: #279962;
+}
+.footer_box .progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 0.92rem;
+}
+.footer_box .progress .cur_time,
+.footer_box .progress .total_time {
+  width: 1rem;
+  line-height: 0.92rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.24rem;
+}
+.footer_box .progress .pro_bg {
+  position: relative;
+  width: 100%;
+  height: 0.04rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+.footer_box .progress .pro_bg .prog_cur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #31C27C;
+}
+.myAudio {
+  display: none;
+}

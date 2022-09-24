@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频处理</title>
+</head>
+
+<body>
+    <!-- 
+        <audio>标签的基础只是
+            src：音频地址[支持格式：mp3、ogg、wav、m4a、m3u8...]
+            controls:显示默认播放器
+            autoplay:自动播放[目前浏览器的策略改变了，一般都是不支持自动播放，需要用户触发相关的行为操作让其播放(我们可以用手机触摸屏幕等方式来模拟出自动播放的效果)]
+            loop：循环模式
+            muted：静音模式
+            preload：预加载方案
+                + auto：加载页面的同时，就开始加载音频文件了
+                + metadata：加载页面的时候，只加载基本信息。音频信息不加载
+                + none：什么都不加载，只有开始播放的时候再去加载
+
+     -->
+    <audio src="./images/myDream.m4a" controls preload="none" class="myAudio"></audio>
+    <button id="submit">控制</button>
+    <!-- <audio>
+        <source src="./images/myDream.mp3" type="audio/mpeg">
+        <source src="./images/myDream.ogg" type="audio/ogg">
+        <source src="./images/myDream.wav" type="audio/wav">
+    </audio> -->
+</body>
+
+</html>
+<script>
+    /* 
+    audio对象具备的属性和方法
+        duration：音频总播放时间[单位：秒]
+        paused：记录是否暂停
+        volume：控制音量 0~1
+        muted：控制静音
+        currentTime：记录已经播放的时间
+        controls、autoplay、loop等都可以在JS中控制
+        -------
+        pause()暂停
+        play() 播放
+        oncanplay：可以播放触发的事件[中间可能会断断续续]
+        oncanplaythrough：[中间播放会流畅]
+
+    */
+    const myAudio = document.querySelector("#myAudio"),
+        submit = document.querySelector("#submit");
+    submit.onclick = function(){
+        if(myAudio.paused){
+            myAudio.play();
+            return
+        }
+        myAudio.pause()
+    }
+</script>

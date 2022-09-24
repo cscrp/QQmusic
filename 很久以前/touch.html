@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端事件处理</title>
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            transition: transform 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>
+<script src="">
+    /*
+    知识点：
+    1.在苹果手机上进行滑动，往往会触发页面默认的滚动行为[边界反弹效果]，一般我们需要禁止其默认行为！！
+        但是这样的行为也会禁止掉页面在手指滑动过程中的‘滚动条’滚动效果
+    2.元素.addEventListener(事件，方法，？)
+        ？可以是true/false：控制哪个阶段触发
+        ？可以是对象： 
+            capture：false  控制是否在捕获阶段触发[false是冒泡阶段]
+            once:false      设置为true，事件只绑定一次-->>触发一次自动移除事件绑定
+            passive：false  设置为true，则方法中不能再基于preventDefault阻止默认行为了
+    3.新版本谷歌浏览器，把window/document/body的touch相关事件的passive都默认设置为true，禁止阻止默认行为
+    */
+    /*     window.addEventListener('touchmove', function (ev) {
+            ev.preventDefault()
+        }, {
+            passive: false
+        })
+        box = document.querySelector(".box");
+        box.ontouchstart = function (ev) {
+            //touchevent单手指事件对象
+            //记录手指按下的起始位置
+            let pointer = ev.changedTouches[0]
+            this.startX = pointer.clientX;
+            this.startY = pointer.clientY;
+            this.isMove = false;
+        }
+        box.ontouchmove = function (ev) {
+            //获取最新手指位置，算出偏移值
+            let pointer = ev.changedTouches[0]
+            let changeX = pointer.clientX - this.startX
+            let changeY = pointer.clientY - this.startY
+            //移动误差超过10px我们则认为发生了移动
+            if (Math.abs(changeX) > 10 || Math.abs(changeY) > 10) {
+                this.isMove = true;
+                this.changeX = changeX
+                this.changeY = changeY
+            }
+        }
+        box.ontouchend = function (ev) {
+            if (!this.isMove) {
+                this.style.transform = 'translateX(200px)'
+                return
+            }
+            let { changeX, changeY } = this;
+            dir = ''
+            if (Math.abs(changeX) > Math.abs(changeY)) {
+                //左右滑动
+                dir = changeX < 0 ? '左' : '右';
+                //上下滑动  
+            } else {
+                dir = changeY < 0 ? '上' : '下';
+            }
+    
+            console.log('触发了一次滑动,滑动方向是'+dir);
+        }
+    
+     */
+
+    /* box.onclick = function(){
+        box.style.transform='translateX(200px)'
+    } */
+</script>
+
+
+<script src="">
+    /*
+    如果移动端，我们依然基于click事件做处理，就要想办法解决其300ms延迟的问题
+      插件：  fastclick.js
+      原理：基于事件委托，委托给()，把click替换为touch处理
+    */
+
+</script>
+
+<script src="./js/zepto.min.js"></script>
+<script>
+    /* 
+    专业的事件库中，不仅仅有对点击操作的封装，还要对滑动、长按、缩放等多种行为操作的封装！
+        + zepto.js
+        + hanmmer.js
+        + ...
+    zepto被'誉为'移动端的JQ！
+        + 正常情况下，JQ咋用，它就咋用！
+        + 如果某个方法JQ能用，但是ZP不能用，那就说明ZP没有(因为其只实现了JQ最常用的方法)
+        + 不考虑IE内核浏览器的兼容，体积比JQ小很多
+        + ZP支持移动端事件(它对移动端事件做了很多的封装)，而这些是JQ不具备的
+    */
+    /*  
+    封装移动端事件方法：
+     tap    点击
+     singleTap  单击
+     doubleTap   双击
+     longTap   长按[750ms]
+     swipe     滑动
+     swipeLeft/Right/Down/Up   滑动方向的事件
+     pinchIn/Out   缩放 
+     */
+    box = document.querySelector(".box")
+    $('.box').tap(function (ev) {
+            $(this).css({
+                transform: 'translateX(200px)'
+            });
+        });
+</script>

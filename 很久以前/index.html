@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>珠峰培训-QQ音乐播放器</title>
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- 增加前缀，获取兼容 -->
+    <script src="./js/prefixfree.min.js" async></script>
+    <!-- 计算REM -->
+    <script>
+        (function () {
+            const computed = function () {
+                let HTML = document.documentElement
+                let curW = HTML.clientWidth;
+                let desW = 750;
+                if (curW >= desW) {
+                    HTML.style.fontSize = `100px`;
+                    return;
+                }
+                HTML.style.fontSize = `${curW / (desW / 100)}px`;
+            };
+            computed();
+            window.addEventListener('resize', computed);
+
+            //切换为横屏的提示
+            window.addEventListener('orientationchange', function () {
+                let rotate = Math.abs(window.orientation);
+                if (rotate === 90) {
+                    //横屏
+                    alert('横屏体验不佳,请您切换回竖屏!')
+                    return
+                }
+            })
+        })()
+    </script>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 头部 -->
+        <header class="header_box">
+            <div class="info">
+                <img src="./images/2.gif" alt="" class="cover">
+                <div class="text">
+                    <h2 class="title">《很久以前》</h2>
+                    <h3 class="author">杨和苏</h3>
+                </div>
+            </div>
+            <a href="javascript:;" class="music_btn"></a>
+        </header>
+
+        <!-- 主体 -->
+        <main class="main_box">
+            <div class="wrapper">
+            </div>
+        </main>
+
+        <!-- 尾部 -->
+        <footer class="footer_box">
+            <div class="progress">
+                <!-- 当前播放时间 -->
+                <span class="cur_time">00:00</span>
+                <!-- 进度条 -->
+                <div class="pro_bg">
+                    <!-- 当前已经播放 -->
+                    <div class="prog_cur"></div>
+                </div>
+                <!-- 音乐总时长 -->
+                <span class="total_time">00:00</span>
+            </div>
+            <a href="javascrippt:;" class="download">下载这首音乐</a>
+        </footer>
+
+        <!-- 遮罩层 -->
+        <div class="bg_img"></div>
+        <div class="mark"></div>
+        <audio src="./images/C400002Opi0h3rTwTp.m4a" preload="none" class="myAudio"></audio>
+    </div>
+</body>
+</html>
+<!-- defer 异步 -->
+<script src="./js/fastclick.js" defer></script>
+<script src="./js/subscribe.js" defer></script>
+<script src="./js/index.js" defer></script>
